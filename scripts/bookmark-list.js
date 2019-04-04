@@ -150,7 +150,13 @@ const BookmarkList = (function() {
 
   function handleBookmarkDelete() {
     $('.js-bookmark-list').on('click', '.remove-bookmark', function() {
-      console.log( $(this) );
+      const id = $(this).closest('li').data('id');
+      Api.deleteBookmark(id)
+        .then(res => res.json())
+        .then(() => {
+          Store.deleteBookmark(id);
+          render();
+        });
     });
   }
 

@@ -14,10 +14,17 @@ const Api = (function() {
   function getBookmarks() {
     return fetch(`${BASE_URL}/bookmarks`);
   }
+
+  function deleteBookmark(id) {
+    return fetch(`${BASE_URL}/bookmarks/${id}`, {
+      method: 'DELETE'
+    });
+  }
   
   
   return {
     addBookmark,
     getBookmarks,
+    deleteBookmark,
   };
 }());

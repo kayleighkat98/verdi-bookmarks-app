@@ -143,6 +143,10 @@ li i {
   color: #d63031;
 }
 
+.remove-bookmark > i:hover {
+  font-weight: bold;
+}
+
 .button.small {
   padding: 6px 19px;
   margin: 10px 0;

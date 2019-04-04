@@ -16,6 +16,11 @@ const Store = (function() {
     bookmark.isExpanded = !bookmark.isExpanded;
   }
 
+  function deleteBookmark(id) {
+    const index = this.list.findIndex(bookmark => bookmark.id === id);
+    this.list.splice(index, 1);
+  }
+
   return {
     list: [],
     isAdding: false,
@@ -23,5 +28,6 @@ const Store = (function() {
     addBookmark,
     toggleExpandedView,
     findById,
+    deleteBookmark,
   };
 }());
