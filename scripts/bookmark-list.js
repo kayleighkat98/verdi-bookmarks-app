@@ -9,20 +9,31 @@ $.fn.extend({
   }
 });
 
-/* globals Store */
+/* globals Store, Api */
 
 const BookmarkList = (function() {
 
   function render(filteredList=null) {
     if (Store.isAdding) {
       $('#js-form').html(bookmarkHtmlForm());
+      $('#js-form').show();
     } else {
       $('#js-form').html('');
+      $('#js-form').hide();
     }
 
     const bookmarks = filteredList ? filteredList : Store.list;
     const bookmarkTemplate = bookmarks.map(bookmark => buildBookmarkHtml(bookmark));
     $('.js-bookmark-list').html(bookmarkTemplate);
+  }
+
+  function renderError(message) {
+    const errorTemplate = `
+      ${message}
+      <span id='close-error-msg'><i class="fas fa-times"></i></span>
+    `;
+    $('.js-error-message').html(errorTemplate);
+    $('.js-error-message').show();
   }
 
   function buildRating(rating) {
@@ -115,7 +126,7 @@ const BookmarkList = (function() {
     `;
   }
 
-  function handleAddNewBookmark() {
+  function handleDisplayForm() {
     $('.container').on('click', '#new-bookmark', function() {
       Store.isAdding = true;
       render();
@@ -134,10 +145,12 @@ const BookmarkList = (function() {
       e.preventDefault();
       const data = $(e.target).serializeJson();
       Api.addBookmark(data)
-        .then(res => res.json())
         .then(bookmark => {
           Store.addBookmark(bookmark);
           render();
+        })
+        .catch(error => {
+          renderError(error.message);
         });
     });
   }
@@ -154,10 +167,12 @@ const BookmarkList = (function() {
     $('.js-bookmark-list').on('click', '.remove-bookmark', function() {
       const id = $(this).closest('li').data('id');
       Api.deleteBookmark(id)
-        .then(res => res.json())
         .then(() => {
           Store.deleteBookmark(id);
           render();
+        })
+        .catch(error => {
+          renderError(error.message);
         });
     });
   }
@@ -177,7 +192,7 @@ const BookmarkList = (function() {
   }
 
   function fireEventHandlers() {
-    handleAddNewBookmark();
+    handleDisplayForm();
     handleFormClose();
     handleFormSubmit();
     handleBookmarkView();
@@ -189,6 +204,7 @@ const BookmarkList = (function() {
 
   return {
     render,
+    renderError,
     fireEventHandlers
   };
 

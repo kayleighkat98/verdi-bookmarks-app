@@ -3,8 +3,26 @@
 const Api = (function() {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/verdi';
 
+  function bookmarkApi(...args) {
+    let error;
+    return fetch(...args)
+      .then(res => {
+        if (!res.ok) {
+          error = {code: res.status};
+        }
+        return res.json();
+      })
+      .then(jsonData => {
+        if (error) {
+          error.message = jsonData.message;
+          return Promise.reject(error);
+        }
+        return jsonData;
+      });
+  }
+  
   function addBookmark(data) {
-    return fetch(`${BASE_URL}/bookmarks`, {
+    return bookmarkApi(`${BASE_URL}/bookmarks`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: data
@@ -12,11 +30,11 @@ const Api = (function() {
   }
 
   function getBookmarks() {
-    return fetch(`${BASE_URL}/bookmarks`);
+    return bookmarkApi(`${BASE_URL}/bookmarks`);
   }
 
   function deleteBookmark(id) {
-    return fetch(`${BASE_URL}/bookmarks/${id}`, {
+    return bookmarkApi(`${BASE_URL}/bookmarks/${id}`, {
       method: 'DELETE'
     });
   }

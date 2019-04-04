@@ -1,15 +1,16 @@
 'use strict';
 
-/* globals BookmarkList */
+/* globals BookmarkList, Store, Api */
 
 $(function() {
   Api.getBookmarks()
-    .then(res => res.json())
     .then(bookmarks => {
       Store.list = bookmarks;
       BookmarkList.render();
+    })
+    .catch(error => {
+      BookmarkList.renderError(error.message);
     });
-    
+
   BookmarkList.fireEventHandlers();
-  
 });

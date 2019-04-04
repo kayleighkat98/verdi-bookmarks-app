@@ -45,6 +45,9 @@ nav {
 
 form {
   max-width: 800px;
+  border: 1px solid black;
+  padding: 20px;
+  background: #dfe6e9;
 }
 
 label {
@@ -170,6 +173,7 @@ li i {
   border: 1px solid black;
   color: white;
   background: #ff7675;
+  max-width:800px;
 }
 
 .js-error-message span {
@@ -185,4 +189,8 @@ li i {
 
 .js-error-message span i:hover {
   color: #d63031;
+}
+
+.hidden {
+  display: none;
 }
