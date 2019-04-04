@@ -170,6 +170,12 @@ const BookmarkList = (function() {
     });
   }
 
+  function handleCloseError() {
+    $('.container').on('click', '#close-error-msg', function() {
+      $(this).closest('div').hide();
+    });
+  }
+
   function fireEventHandlers() {
     handleAddNewBookmark();
     handleFormClose();
@@ -177,6 +183,7 @@ const BookmarkList = (function() {
     handleBookmarkView();
     handleBookmarkDelete();
     handleFilterByRating();
+    handleCloseError();
   }
 
 

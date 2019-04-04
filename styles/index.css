@@ -162,3 +162,27 @@ li i {
   background: white;
   margin-left: 20px;
 }
+
+.js-error-message {
+  position: relative;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  color: white;
+  background: #ff7675;
+}
+
+.js-error-message span {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  cursor: pointer;
+}
+
+.js-error-message span i {
+  font-size: 25px;
+}
+
+.js-error-message span i:hover {
+  color: #d63031;
+}
