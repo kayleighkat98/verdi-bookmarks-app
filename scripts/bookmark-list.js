@@ -13,13 +13,15 @@ $.fn.extend({
 
 const BookmarkList = (function() {
 
-  function render() {
+  function render(filteredList=null) {
     if (Store.isAdding) {
       $('#js-form').html(bookmarkHtmlForm());
     } else {
       $('#js-form').html('');
     }
-    const bookmarkTemplate = Store.list.map(bookmark => buildBookmarkHtml(bookmark));
+
+    const bookmarks = filteredList ? filteredList : Store.list;
+    const bookmarkTemplate = bookmarks.map(bookmark => buildBookmarkHtml(bookmark));
     $('.js-bookmark-list').html(bookmarkTemplate);
   }
 
@@ -160,12 +162,21 @@ const BookmarkList = (function() {
     });
   }
 
+  function handleFilterByRating() {
+    $('.bookmark-controls').on('change', 'select', function() {
+      const rating = $(this).val();
+      const filteredList = Store.filterByRating(rating);
+      render(filteredList);
+    });
+  }
+
   function fireEventHandlers() {
     handleAddNewBookmark();
     handleFormClose();
     handleFormSubmit();
     handleBookmarkView();
     handleBookmarkDelete();
+    handleFilterByRating();
   }
 
 

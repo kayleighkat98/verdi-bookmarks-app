@@ -21,6 +21,13 @@ const Store = (function() {
     this.list.splice(index, 1);
   }
 
+  function filterByRating(rating) {
+    if (rating) {
+      return this.list.filter(bookmark => bookmark.rating && bookmark.rating === Number(rating));
+    }
+    return this.list;
+  }
+
   return {
     list: [],
     isAdding: false,
@@ -29,5 +36,6 @@ const Store = (function() {
     toggleExpandedView,
     findById,
     deleteBookmark,
+    filterByRating,
   };
 }());
