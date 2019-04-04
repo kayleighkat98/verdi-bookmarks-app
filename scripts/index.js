@@ -1,3 +1,15 @@
 'use strict';
 
-console.log('index modeule ran');
+/* globals BookmarkList */
+
+$(function() {
+  Api.getBookmarks()
+    .then(res => res.json())
+    .then(bookmarks => {
+      Store.list = bookmarks;
+      BookmarkList.render();
+    });
+    
+  BookmarkList.fireEventHandlers();
+  
+});

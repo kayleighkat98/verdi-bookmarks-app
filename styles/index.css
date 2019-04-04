@@ -116,7 +116,7 @@ li .body {
   padding: 10px;
 }
 
-li .fa-chevron-down {
+li [class*='fa-chevron-'] {
   position: absolute;
   color: black;
   font-size: 20px;
@@ -128,13 +128,24 @@ li i {
   color: #fdcb6e;
 }
 
+.rating {
+  position: relative;
+}
+
+.remove-bookmark {
+  position: absolute;
+  right: 2px;
+  bottom: -10px;
+  padding: 10px;
+}
+
+.remove-bookmark > i {
+  color: #d63031;
+}
+
 .button.small {
   padding: 6px 19px;
   margin: 10px 0;
-}
-
-.hidden {
-  display: none;
 }
 
 .bookmark-controls {
