@@ -132,3 +132,18 @@ li i {
   padding: 6px 19px;
   margin: 10px 0;
 }
+
+.hidden {
+  display: none;
+}
+
+.bookmark-controls {
+  margin-bottom: 15px;
+}
+
+.bookmark-controls select {
+  height: 50px;
+  width: 200px;
+  background: white;
+  margin-left: 20px;
+}

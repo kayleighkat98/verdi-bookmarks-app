@@ -22,7 +22,7 @@
 
   <div class='container'>
     <main>
-      <form id='js-form'>
+      <form id='js-form' class='hidden'>
         <div class='form-field'>
           <label for='bookmark-title'>Title</label>
           <input type='text' name='title' id='bookmark-title'>
@@ -55,6 +55,17 @@
 
       <section>
         <h2>Bookmarks</h2>
+        <div class='bookmark-controls'>
+          <button class='button'>Add New Bookmark</button>
+          <select>
+            <option value="" selected>Filter By Rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
         <ul class='js-bookmark-list'>
           <li class='bookmark'>
             <div class='header'>
