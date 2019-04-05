@@ -43,14 +43,14 @@ nav {
   padding-right: 10px;
 }
 
-form {
+form#js-form {
   max-width: 800px;
   border: 1px solid black;
   padding: 20px;
   background: #dfe6e9;
 }
 
-label {
+#js-form label {
   display: block;
 }
 
@@ -106,13 +106,13 @@ ul {
 li {
   border: 1px solid black;
   position: relative;
-  cursor: pointer;
   margin-bottom: 10px;
 }
 
 li .header {
   padding: 10px;
   background: lightgray;
+  cursor: pointer;
 }
 
 li .body {
@@ -147,6 +147,21 @@ li i {
 }
 
 .remove-bookmark > i:hover {
+  font-weight: bold;
+}
+
+.edit-bookmark {
+  position: absolute;
+  right: 30px;
+  bottom: -10px;
+  padding: 10px;
+}
+
+.edit-bookmark i {
+  color: #2d3436;
+}
+
+.edit-bookmark i:hover {
   font-weight: bold;
 }
 

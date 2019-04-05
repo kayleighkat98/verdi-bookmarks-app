@@ -21,6 +21,10 @@ const Api = (function() {
       });
   }
   
+  function getBookmarks() {
+    return bookmarkApi(`${BASE_URL}/bookmarks`);
+  }
+
   function addBookmark(data) {
     return bookmarkApi(`${BASE_URL}/bookmarks`, {
       method: 'POST',
@@ -29,13 +33,17 @@ const Api = (function() {
     });
   }
 
-  function getBookmarks() {
-    return bookmarkApi(`${BASE_URL}/bookmarks`);
-  }
-
   function deleteBookmark(id) {
     return bookmarkApi(`${BASE_URL}/bookmarks/${id}`, {
       method: 'DELETE'
+    });
+  }
+
+  function updateBookmark(id, data) {
+    return bookmarkApi(`${BASE_URL}/bookmarks/${id}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: data
     });
   }
   
@@ -44,5 +52,6 @@ const Api = (function() {
     addBookmark,
     getBookmarks,
     deleteBookmark,
+    updateBookmark
   };
 }());

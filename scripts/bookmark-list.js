@@ -60,8 +60,42 @@ const BookmarkList = (function() {
           <a class='button small' href='${bookmark.url}' target='_blank'>Visit Site</a>
           <div class='rating'>
             ${bookmark.rating ? buildRating(bookmark.rating) : 'no rating given'}
+            <span class='edit-bookmark'><i class="far fa-edit"></i></span>
             <span class='remove-bookmark'><i class="far fa-trash-alt"></i></span>
           </div>
+        </div>
+      </li>
+    `;
+  }
+
+  function buildEditHtml(bookmark) {
+    return `
+      <li class='bookmark' data-id='${bookmark.id}'>
+        <div class='header'>
+          <i class="fas fa-chevron-up"></i>
+          <h3>${bookmark.title}</h3>
+        </div>
+        
+        <div class='body'>
+          <form id='js-edit-form'>
+            <div>
+              <label style='display:block;' for='edit-bookmark-desc'>Description</label>
+              <textarea rows="5" cols="53" form='js-edit-form' name='desc' id='edit-bookmark-desc'>${bookmark.desc ? bookmark.desc : 'no description given'}</textarea>
+            </div>
+            <div class='rating'>
+              <fieldset>
+                <legend> Rating </legend>
+                  <label> <input type="radio" name="rating" value="1" ${bookmark.rating === 1 ? 'checked="checked"' : ''}> 1 </label>
+                  <label> <input type="radio" name="rating" value="2" ${bookmark.rating === 2 ? 'checked="checked"' : ''}> 2 </label>
+                  <label> <input type="radio" name="rating" value="3" ${bookmark.rating === 3 ? 'checked="checked"' : ''}> 3 </label>
+                  <label> <input type="radio" name="rating" value="4" ${bookmark.rating === 4 ? 'checked="checked"' : ''}> 4 </label>
+                  <label> <input type="radio" name="rating" value="5" ${bookmark.rating === 5 ? 'checked="checked"' : ''}> 5 </label>
+              </fieldset>
+              <span class='edit-bookmark'><a href='#'>cancel edit</a></span>
+              <span class='remove-bookmark'><i class="far fa-trash-alt"></i></span>
+            </div>
+            <button type='submit' class='button small'>Update Bookmark</button>
+          </form>
         </div>
       </li>
     `;
@@ -86,7 +120,9 @@ const BookmarkList = (function() {
   }
   
   function buildBookmarkHtml(bookmark) {
-    if (bookmark.isExpanded) {
+    if (bookmark.isEditing) {
+      return buildEditHtml(bookmark);
+    } else if (bookmark.isExpanded) {
       return buildExpandedHtml(bookmark);
     } else {
       return buildListViewHtml(bookmark);
@@ -141,7 +177,7 @@ const BookmarkList = (function() {
   }
 
   function handleFormSubmit() {
-    $('.container').on('submit', 'form', function(e) {
+    $('.container').on('submit', 'form#js-form', function(e) {
       e.preventDefault();
       const data = $(e.target).serializeJson();
       Api.addBookmark(data)
@@ -191,6 +227,30 @@ const BookmarkList = (function() {
     });
   }
 
+  function handleEditView() {
+    $('.js-bookmark-list').on('click', '.edit-bookmark', function() {
+      const id = $(this).closest('li').data('id');
+      Store.toggleEditing(id);
+      render();
+    });
+  }
+
+  function handleEditFormSubmit() {
+    $('.js-bookmark-list').on('submit', 'form#js-edit-form', function(e){
+      e.preventDefault();
+      const id = $(this).closest('li').data('id');
+      const data = $(e.target).serializeJson();
+      Api.updateBookmark(id, data)
+        .then(() => {
+          Store.updateBookmark(id, data);
+          render();
+        })
+        .catch(error => {
+          renderError(error.message);
+        });
+    });
+  }
+
   function fireEventHandlers() {
     handleDisplayForm();
     handleFormClose();
@@ -199,6 +259,8 @@ const BookmarkList = (function() {
     handleBookmarkDelete();
     handleFilterByRating();
     handleCloseError();
+    handleEditView();
+    handleEditFormSubmit();
   }
 
 

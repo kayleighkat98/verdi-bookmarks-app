@@ -1,19 +1,10 @@
 'use strict';
 
 const Store = (function() {
-
+  // CRUD methods
   function addBookmark(bookmark) {
     this.list.push(bookmark);
     this.isAdding = false;
-  }
-
-  function findById(id) {
-    return this.list.find(bookmark => bookmark.id === id);
-  }
-
-  function toggleExpandedView(id) {
-    const bookmark = this.findById(id);
-    bookmark.isExpanded = !bookmark.isExpanded;
   }
 
   function deleteBookmark(id) {
@@ -21,11 +12,38 @@ const Store = (function() {
     this.list.splice(index, 1);
   }
 
+  function updateBookmark(id, data) {
+    data = JSON.parse(data);
+    const bookmark = this.findById(id);
+    bookmark.isEditing = false;
+    bookmark.isExpanded = true;
+    Object.keys(data).forEach(key => {
+      bookmark[key] = data[key];
+    });
+  }
+
+  // Filtering methods
+
+  function toggleExpandedView(id) {
+    const bookmark = this.findById(id);
+    bookmark.isExpanded = !bookmark.isExpanded;
+  }
+
+  function toggleEditing(id) {
+    const bookmark = this.findById(id);
+    bookmark.isEditing = !bookmark.isEditing;
+  }
+
   function filterByRating(rating) {
     if (rating) {
       return this.list.filter(bookmark => bookmark.rating && bookmark.rating === Number(rating));
     }
     return this.list;
+  }
+
+  // Utility methods
+  function findById(id) {
+    return this.list.find(bookmark => bookmark.id === id);
   }
 
   return {
@@ -37,5 +55,7 @@ const Store = (function() {
     findById,
     deleteBookmark,
     filterByRating,
+    toggleEditing,
+    updateBookmark
   };
 }());
