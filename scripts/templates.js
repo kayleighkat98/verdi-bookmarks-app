@@ -17,8 +17,9 @@ const Templates = (function() {
       <h2>Bookmarks</h2>
       <div class='bookmark-controls'>
         <button class='button' id='new-bookmark'>Add New Bookmark</button>
-        <select>
-          <option value="" ${Store.filterBy === '' ? 'selected="selected"' : ''}>Filter By Min Rating</option>
+        <label for='filter-by-rating'>Filter By Min Rating</label>
+        <select id='filter-by-rating'>
+          <option value="" ${Store.filterBy === '' ? 'selected="selected"' : ''}>All</option>
           <option value="1" ${Store.filterBy === 1 ? 'selected="selected"' : ''}>1 Star</option>
           <option value="2" ${Store.filterBy === 2 ? 'selected="selected"' : ''}>2 Stars</option>
           <option value="3" ${Store.filterBy === 3 ? 'selected="selected"' : ''}>3 Stars</option>
@@ -48,9 +49,9 @@ const Templates = (function() {
         <input type='text' name='url' id='bookmark-url'>
       </div>
 
-      <div class='form-field'>
+      <div class='form-field description'>
         <label for='bookmark-desc'>Description</label>
-        <textarea rows="5" cols="53" form='js-form' name='desc' id='bookmark-desc'></textarea>
+        <textarea form='js-form' name='desc' id='bookmark-desc'></textarea>
       </div>
 
       <fieldset class='form-field'>
@@ -79,9 +80,9 @@ const Templates = (function() {
         
         <div class='body'>
           <form id='js-edit-form'>
-            <div>
+            <div class='description'>
               <label style='display:block;' for='edit-bookmark-desc'>Description</label>
-              <textarea rows="5" cols="53" form='js-edit-form' name='desc' id='edit-bookmark-desc'>${bookmark.desc ? bookmark.desc : 'no description given'}</textarea>
+              <textarea form='js-edit-form' name='desc' id='edit-bookmark-desc'>${bookmark.desc ? bookmark.desc : 'no description given'}</textarea>
             </div>
             <div class='rating'>
               <fieldset>

@@ -171,6 +171,13 @@ li i {
 
 .bookmark-controls {
   margin-bottom: 15px;
+  position: relative;
+}
+
+.bookmark-controls label {
+  position: absolute;
+  top: -25px;
+  left: 230px;
 }
 
 .bookmark-controls select {
@@ -211,4 +218,81 @@ li i {
 
 .js-no-bookmarks-intro button{
   margin-top: 20px;
+}
+
+.description {
+  width: 400px;
+  height: 100px;
+}
+
+.description textarea {
+  width: 100%;
+  height: 100%;
+}
+
+#js-edit-form .description {
+  height: 125px;
+}
+
+#js-edit-form textarea {
+  height: 80%;
+}
+
+#js-edit-form .rating label {
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 640px) {
+  .bookmark-controls button, .bookmark-controls label,  .bookmark-controls select {
+    display: block;
+    width: 100%;
+  }
+
+  .bookmark-controls label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    position: static;
+  }
+
+  .bookmark-controls select {
+    margin: 0;
+  }
+
+  #js-form .form-field {
+    display: block;
+  }
+
+  #js-form fieldset {
+    margin-top: 30px;
+  }
+
+  #js-form fieldset label {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  #js-form input[type='text'] {
+    width: 100%;
+  }
+
+  .description textarea {
+    width: 77%;
+  }
+
+  #js-edit-form textarea {
+    width: 89%;
+    height: 100px;
+  }
+
+  #js-edit-form > div {
+    margin-top: 10px;
+  }
+
+  #js-edit-form .rating {
+    margin: 15px 0;
+  }
+
+  #js-edit-form .rating label {
+    margin-right: 10px;
+  }
 }
