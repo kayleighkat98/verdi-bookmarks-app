@@ -23,7 +23,6 @@ const Store = (function() {
   }
 
   // Filtering methods
-
   function toggleExpandedView(id) {
     const bookmark = this.findById(id);
     bookmark.isExpanded = !bookmark.isExpanded;
