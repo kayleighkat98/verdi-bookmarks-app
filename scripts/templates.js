@@ -18,7 +18,7 @@ const Templates = (function() {
       <div class='bookmark-controls'>
         <button class='button' id='new-bookmark'>Add New Bookmark</button>
         <select>
-          <option value="" ${Store.filterBy === '' ? 'selected="selected"' : ''}>Filter By Rating</option>
+          <option value="" ${Store.filterBy === '' ? 'selected="selected"' : ''}>Filter By Min Rating</option>
           <option value="1" ${Store.filterBy === 1 ? 'selected="selected"' : ''}>1 Star</option>
           <option value="2" ${Store.filterBy === 2 ? 'selected="selected"' : ''}>2 Stars</option>
           <option value="3" ${Store.filterBy === 3 ? 'selected="selected"' : ''}>3 Stars</option>

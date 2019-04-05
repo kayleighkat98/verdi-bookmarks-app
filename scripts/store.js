@@ -36,7 +36,7 @@ const Store = (function() {
   function filterByRating(rating) {
     this.filterBy = Number(rating);
     if (rating) {
-      return this.list.filter(bookmark => bookmark.rating && bookmark.rating === Number(rating));
+      return this.list.filter(bookmark => bookmark.rating && bookmark.rating >= Number(rating));
     }
     
     return this.list;
