@@ -18,7 +18,7 @@ const Store = (function() {
     bookmark.isEditing = false;
     bookmark.isExpanded = true;
     Object.keys(data).forEach(key => {
-      bookmark[key] = data[key];
+      bookmark[key] = (key === 'rating') ? Number(data[key]) : data[key];
     });
   }
 
@@ -34,9 +34,11 @@ const Store = (function() {
   }
 
   function filterByRating(rating) {
+    this.filterBy = Number(rating);
     if (rating) {
       return this.list.filter(bookmark => bookmark.rating && bookmark.rating === Number(rating));
     }
+    
     return this.list;
   }
 
@@ -48,6 +50,7 @@ const Store = (function() {
   return {
     list: [],
     isAdding: false,
+    filterBy: '',
 
     addBookmark,
     toggleExpandedView,
