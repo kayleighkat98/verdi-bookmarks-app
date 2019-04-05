@@ -22,8 +22,36 @@ const BookmarkList = (function() {
       $('#js-form').hide();
     }
 
+    if (!Store.list.length) {
+      const introTemplate = `
+        <h2>Welcome to Stockpile</h2>
+        <p>You don't have any bookmarks yet!  Click 'Add New Bookmark' to add your first bookmark.</p>
+        <button class='button' id='new-bookmark'>Add New Bookmark</button>
+      `;
+      $('.js-list-header').html('');
+      $('.js-bookmark-list').html('');
+      return $('.js-no-bookmarks-intro').html(introTemplate);
+    }
+
     const bookmarks = filteredList ? filteredList : Store.list;
     const bookmarkTemplate = bookmarks.map(bookmark => buildBookmarkHtml(bookmark));
+    const listHeaderTemplate = `
+    <h2>Bookmarks</h2>
+    <div class='bookmark-controls'>
+      <button class='button' id='new-bookmark'>Add New Bookmark</button>
+      <select>
+        <option value="" selected>Filter By Rating</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    `;
+
+    $('.js-no-bookmarks-intro').html('');
+    $('.js-list-header').html(listHeaderTemplate);
     $('.js-bookmark-list').html(bookmarkTemplate);
   }
 
@@ -162,6 +190,7 @@ const BookmarkList = (function() {
     `;
   }
 
+  // Event handlers
   function handleDisplayForm() {
     $('.container').on('click', '#new-bookmark', function() {
       Store.isAdding = true;
@@ -269,6 +298,4 @@ const BookmarkList = (function() {
     renderError,
     fireEventHandlers
   };
-
-  
 }());

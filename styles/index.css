@@ -209,3 +209,7 @@ li i {
 .hidden {
   display: none;
 }
+
+.js-no-bookmarks-intro button{
+  margin-top: 20px;
+}
