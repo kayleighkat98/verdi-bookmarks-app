@@ -12,7 +12,6 @@ const Templates = (function() {
     `;
   }
 
-
   function listHeader() {
     return `
       <h2>Bookmarks</h2>
@@ -20,11 +19,11 @@ const Templates = (function() {
         <button class='button' id='new-bookmark'>Add New Bookmark</button>
         <select>
           <option value="" ${Store.filterBy === '' ? 'selected="selected"' : ''}>Filter By Rating</option>
-          <option value="1" ${Store.filterBy === 1 ? 'selected="selected"' : ''}>1</option>
-          <option value="2" ${Store.filterBy === 2 ? 'selected="selected"' : ''}>2</option>
-          <option value="3" ${Store.filterBy === 3 ? 'selected="selected"' : ''}>3</option>
-          <option value="4" ${Store.filterBy === 4 ? 'selected="selected"' : ''}>4</option>
-          <option value="5" ${Store.filterBy === 5 ? 'selected="selected"' : ''}>5</option>
+          <option value="1" ${Store.filterBy === 1 ? 'selected="selected"' : ''}>1 Star</option>
+          <option value="2" ${Store.filterBy === 2 ? 'selected="selected"' : ''}>2 Stars</option>
+          <option value="3" ${Store.filterBy === 3 ? 'selected="selected"' : ''}>3 Stars</option>
+          <option value="4" ${Store.filterBy === 4 ? 'selected="selected"' : ''}>4 Stars</option>
+          <option value="5" ${Store.filterBy === 5 ? 'selected="selected"' : ''}>5 Stars</option>
         </select>
       </div>
     `;

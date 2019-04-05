@@ -4,7 +4,6 @@
   margin: 0;
 }
 
-
 nav {
   background: #6c5ce7;
   padding:10px;
@@ -79,7 +78,7 @@ input[type='text'] {
 }
 
 .button {
-  background-color: #0984e3;
+  background-color: #e84393;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -142,11 +141,11 @@ li i {
   padding: 10px;
 }
 
-.remove-bookmark > i {
+.remove-bookmark i {
   color: #d63031;
 }
 
-.remove-bookmark > i:hover {
+.remove-bookmark i:hover {
   font-weight: bold;
 }
 
